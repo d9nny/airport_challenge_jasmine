@@ -34,7 +34,7 @@ describe("Airport", function() {
 			for (var i = 0; i < capacity; i++) {
 				airport.land(plane);
 			}
-			expect(function() {airport.land(plane);}).toThrow(Error("Airport is full"));
+			expect(function() {airport.land(plane);}).toThrow("Airport is full");
 		});
   });	
 
