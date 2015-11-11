@@ -44,12 +44,14 @@ describe("Airport", function() {
 		it('takes off a plane', function () {
 			expect(airport.takeOff).not.toBeUndefined();
 		});
+
 		it('allows a plane to take off', function() {
 			spyOn(Math, 'random').and.returnValue(0.9);
 			airport.land(plane)
 			airport.takeOff(plane)
 			expect(airport.isInAirport(plane)).toEqual(false)
 		});
+
 		it('prevents a plane taking off when its stormy', function() {
 			spyOn(Math, 'random').and.returnValue(0.1);
 			airport.land(plane)
