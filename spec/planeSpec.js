@@ -1,5 +1,5 @@
 descibe("Plane", function () {
-
+  console.log('loaded')
 	var plane;
 
 	beforeEach(function() {

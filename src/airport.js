@@ -1,11 +1,14 @@
 function Airport() {
-	this.hangar = []
+	this.hangar = [];
+	this.capacity = 10;
+};
+
+Airport.prototype.isFull = function() {
+	return this.hangar.length >= this.capacity
 };
 
 Airport.prototype.land = function(plane) {
-	// if(this.isFull()) {
-  //  	throw new Error('cannot land when the airport is full');
-  //  }
+	if (this.isFull()) { throw "Airport is full";}
   plane.land();
   this.hangar.push(plane);
 };
@@ -21,9 +24,3 @@ Airport.prototype.takeOff = function(plane) {
 
 };
 
-Airport.prototype.isFull = function() {
-	// if (this.hangar >= 50) {
-	// 	return true;
-	// }
-		return false;
-};

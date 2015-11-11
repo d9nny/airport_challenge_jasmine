@@ -2,7 +2,7 @@ describe("Airport", function() {
 
 	var airport;
 	var plane;
-	var hangar;
+	var capacity = 10;
 
 	beforeEach(function() {
 		airport = new Airport();
@@ -11,16 +11,12 @@ describe("Airport", function() {
 		},
 		takeOff : function() {
 			landed = true;
-		}
-		};
+		}};
 		spyOn(plane, 'land');
   	spyOn(plane, 'takeOff');
-
 	});
 
-
 	describe('#land', function() {
-
 		it('expects to respond to', function () {
 			expect(airport.land).not.toBeUndefined();
 		});
@@ -34,15 +30,14 @@ describe("Airport", function() {
 			airport.land(plane);
     	expect(airport.isInAirport(plane)).toEqual(true);
 		});
-
-
+		it('raises an error when the airport is full', function() {
+			for (var i = 0; i < capacity; i++) {
+				airport.land(plane);
+			}
+			expect(function() {airport.land(plane);}).toThrow(Error("Airport is full"));
+		});
   });	
 
-  // 	it('raises an error when the airport is full', function () {
-	// 		spyOn(airport,'isFull').and.returnValue(true);
-	// 		expect(function(){ airport.land(plane); }).to.ThrowError('cannot land when the airport is full');
-	// 	});
-	// });
 
 	describe('#takeOff', function() {
 		it('takes off a plane', function () {
