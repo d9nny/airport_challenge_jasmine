@@ -7,9 +7,17 @@ Airport.prototype.land = function(plane) {
   //  	throw new Error('cannot land when the airport is full');
   //  }
   plane.land();
+  this.hangar.push(plane);
 };
 
-Airport.prototype.take_off = function(plane) {
+Airport.prototype.isInAirport = function(plane) {
+	matches = this.hangar.filter(function(p) {
+		return (p === plane);
+	});
+	return (matches.length > 0);
+};
+
+Airport.prototype.takeOff = function(plane) {
 
 };
 
