@@ -51,9 +51,14 @@ describe("Airport", function() {
 			expect(airport.isInAirport(plane)).toEqual(false)
 		});
 		it('prevents a plane taking off when its stormy', function() {
-			spyOn(Math, 'random').and.returnValue(0.9);
+			spyOn(Math, 'random').and.returnValue(0.1);
 			airport.land(plane)
 			expect(function() {airport.takeOff(plane);}).toThrow("Too stormy to take off");
+		});
+
+		it('refuses to take off planes that are not at the airport', function() {  
+			spyOn(Math, 'random').and.returnValue(0.9);
+			expect(function() {airport.takeOff(plane);}).toThrow("The plane did not land on this airport");
 		});
 	});
 
@@ -63,14 +68,11 @@ describe("Airport", function() {
 		});
 	});
 
-
-
-	// describe('#isStormy', function() {
-	// 	it("Should tell us when the weather is stormy", function() {
-	// 	  spyOn(Math, 'random').and.returnValue(0.1);
-	// 	  expect(airport.isStormy()).toBe(true);
-	//   });
-	// });
-
+	describe('#isStormy', function() {
+		it("Should tell us when the weather is stormy", function() {
+		  spyOn(Math, 'random').and.returnValue(0.1);
+		  expect(airport.isStormy()).toBe(true);
+	  });
+	});
 
 });

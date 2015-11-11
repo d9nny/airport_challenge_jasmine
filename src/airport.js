@@ -25,12 +25,13 @@ Airport.prototype.isInAirport = function(plane) {
 
 Airport.prototype.takeOff = function(plane) {
 	if (this.isStormy()) {throw "Too stormy to take off"}
+	if (!this.isInAirport(plane)) {throw "The plane did not land on this airport"}
 	plane.takeOff
 	this.hangar.splice(this.hangar.indexOf(plane),1);
 };
 
 Airport.prototype.weather = function() {
-	return this.weatherCondition[Math.round(Math.random()*2)];
+	return this.weatherConditions[Math.round(Math.random()*2)];
 };
 
 Airport.prototype.isStormy = function() {
