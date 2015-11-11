@@ -2,21 +2,27 @@ describe("Airport", function() {
 
 	var airport;
 	var plane;
+	var hangar;
 
 	beforeEach(function() {
-		airport = new Airport();		
+		airport = new Airport();	
 	});
 
 
 	describe('#land', function() {
+
+		it('expects to respond to', function () {
+			expect(airport.land).not.toBeUndefined();
+		});
+
 		it('instructs a plane to land', function () {
 			airport.land(plane);
     	expect(plane.land).toHaveBeenCalled();
 		});
-	});	
 
+  });	
 
-	// 	it('raises an error when the airport is full', function () {
+  // 	it('raises an error when the airport is full', function () {
 	// 		spyOn(airport,'isFull').and.returnValue(true);
 	// 		expect(function(){ airport.land(plane); }).to.ThrowError('cannot land when the airport is full');
 	// 	});
