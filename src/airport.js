@@ -1,6 +1,6 @@
-function Airport() {
+function Airport(value) {
 	this.hangar = [];
-	this.capacity = 10;
+	this.capacity = value;
 	this.sunny = Symbol("sunny")
 	this.stormy = Symbol("stormy")
 	this.weatherConditions = [this.stormy, this.sunny, this.sunny];
@@ -24,14 +24,16 @@ Airport.prototype.isInAirport = function(plane) {
 };
 
 Airport.prototype.takeOff = function(plane) {
-
+	if (this.isStormy()) {throw "Too stormy to take off"}
+	plane.takeOff
+	this.hangar.splice(this.hangar.indexOf(plane),1);
 };
 
-Airport.prototype.weather = function(plane) {
+Airport.prototype.weather = function() {
 	return this.weatherCondition[Math.round(Math.random()*2)];
 };
 
-Airport.prototype.isStormy = function(plane) {
+Airport.prototype.isStormy = function() {
 	return this.weather() === this.stormy;
 };
 

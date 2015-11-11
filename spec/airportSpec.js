@@ -5,7 +5,7 @@ describe("Airport", function() {
 	var capacity = 10;
 
 	beforeEach(function() {
-		airport = new Airport();
+		airport = new Airport(capacity);
 		plane = { land : function() {
 			landed = true;
 		},
@@ -30,6 +30,7 @@ describe("Airport", function() {
 			airport.land(plane);
     	expect(airport.isInAirport(plane)).toEqual(true);
 		});
+
 		it('raises an error when the airport is full', function() {
 			for (var i = 0; i < capacity; i++) {
 				airport.land(plane);
@@ -43,6 +44,17 @@ describe("Airport", function() {
 		it('takes off a plane', function () {
 			expect(airport.takeOff).not.toBeUndefined();
 		});
+		it('allows a plane to take off', function() {
+			spyOn(Math, 'random').and.returnValue(0.9);
+			airport.land(plane)
+			airport.takeOff(plane)
+			expect(airport.isInAirport(plane)).toEqual(false)
+		});
+		it('prevents a plane taking off when its stormy', function() {
+			spyOn(Math, 'random').and.returnValue(0.9);
+			airport.land(plane)
+			expect(function() {airport.takeOff(plane);}).toThrow("Too stormy to take off");
+		});
 	});
 
 	describe('#weather', function() {
@@ -51,12 +63,14 @@ describe("Airport", function() {
 		});
 	});
 
-	describe('#isStormy', function() {
-		it("Should tell us when the weather is stormy", function() {
-		  spyOn(Math, 'random').andReturn(0.0);
-		  expect(airport.isStormy()).toBe(true);
-	  });
-	});
+
+
+	// describe('#isStormy', function() {
+	// 	it("Should tell us when the weather is stormy", function() {
+	// 	  spyOn(Math, 'random').and.returnValue(0.1);
+	// 	  expect(airport.isStormy()).toBe(true);
+	//   });
+	// });
 
 
 });
