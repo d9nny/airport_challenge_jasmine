@@ -10,7 +10,7 @@ describe("Airport", function() {
 			landed = true;
 		},
 		takeOff : function() {
-			landed = true;
+			landed = false;
 		}};
 		spyOn(plane, 'land');
   	spyOn(plane, 'takeOff');
@@ -44,5 +44,19 @@ describe("Airport", function() {
 			expect(airport.takeOff).not.toBeUndefined();
 		});
 	});
+
+	describe('#weather', function() {
+		it('tell us how is the weather', function () {
+			expect(airport.weather).toBeTruthy; //toBeTruthy= whether or not is nil
+		});
+	});
+
+	describe('#isStormy', function() {
+		it("Should tell us when the weather is stormy", function() {
+		  spyOn(Math, 'random').andReturn(0.0);
+		  expect(airport.isStormy()).toBe(true);
+	  });
+	});
+
 
 });
